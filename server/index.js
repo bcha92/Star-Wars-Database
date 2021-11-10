@@ -4,7 +4,7 @@ import cors from "cors";
 import morgan from "morgan";
 
 import { // Endpoint Handlers
-    getPeople, getPerson, getPlanets, getStarships,
+    getPeople, getPlanets, getStarships,
 } from "./handlers.js";
 
 // Local Port to host application || 4000 by default
@@ -20,7 +20,6 @@ app.use(morgan("tiny")); // Logger Middleware for http request errors
 app.get("/people", getPeople); // List of People
 app.get("/planets", getPlanets); // List of Planets
 app.get("/starships", getStarships); // List of Starships
-app.get("/people", getPerson); // Get a Person by Name
 
 // Error Handling
 app.get("*", (req, res) => res.status(404).json(
