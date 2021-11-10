@@ -3,9 +3,7 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 
-import { // Endpoint Handlers
-    getPeople, getPlanets, getStarships,
-} from "./handlers.js";
+import { getPeople, getPlanets, getStarships } from "./handlers.js";
 
 // Local Port to host application || 4000 by default
 const PORT = process.env.PORT || 4000;
