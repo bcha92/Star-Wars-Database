@@ -8,6 +8,7 @@ import GlobalStyles from "./GlobalStyles";
 
 // Child Components
 import Home from "./Home";
+import Database from "./Database";
 
 // Main App Component
 const App = () => {
@@ -37,9 +38,9 @@ const App = () => {
       {/* NEW Update from Switch/Route in react-router-dom v5 */}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/people" element={"People"} />
-        <Route path="/planets" element={"Planets"} />
-        <Route path="/starships" element={"Starships"} />
+        <Route path="/people" element={<Database id="people" />} />
+        <Route path="/planets" element={<Database id="planets" />} />
+        <Route path="/starships" element={<Database id="starships" />} />
       </Routes>
     </BrowserRouter>
   </Wrapper>
