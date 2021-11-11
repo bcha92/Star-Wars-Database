@@ -17,7 +17,7 @@ const Database = ({ id }) => {
     // Search Bar Results Function
     const getResults = (query) => {
         setLoading("loading");
-        fetch(`/people?search=${query}`)
+        fetch(`/${id}?search=${query}`)
         .then(res => res.json())
         .then(body => {
             if (body !== null) {
@@ -47,9 +47,8 @@ const Database = ({ id }) => {
     }, [id, page]);
 
     return <DatabaseWrap>
-        {id === "people" && <Search //Search Results Component
-            getResults={getResults}
-        />}
+        {/* Search Bar Component */}
+        <Search getResults={getResults} id={id} />
 
         <ListWrap /* Database Items List Renderer from Fetch */>
             <h2>List of { // Title of Database Page using "id"

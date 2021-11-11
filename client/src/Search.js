@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 // Search Bar Component
-const Search = ({ getResults }) => {
+const Search = ({ getResults, id }) => {
     // Search Bar Query
     const [search, setSearch] = useState("");
 
@@ -12,7 +12,9 @@ const Search = ({ getResults }) => {
     }}>
         <input // Search Input
             className="search"
-            placeholder="Search for a Person by Name"
+            placeholder={`Search for ${id} by ${
+                id === "starships" ? "name / model" : "name"
+            }`}
             // Search Query based on Value
             onChange={(e) => setSearch(e.target.value)}
         ></input>
