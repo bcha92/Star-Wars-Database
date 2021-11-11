@@ -13,11 +13,20 @@ const Database = ({ id }) => {
     const [page, setPage] = useState(1); // Page # State for API
     // Container to store fetched data from backend server
     const [data, setData] = useState(null);
+
+    // Disable/Enable Previous/Next Page buttons while using search tab.
+    const [showButtons, setButtons] = useState(true);
     
     // Search Bar Results Function
     const getResults = (query) => {
         setLoading("loading");
-        fetch(`/${id}?search=${query}`)
+        query.length < 1 ?
+        setButtons(true) : setButtons(false);
+
+        fetch(`/${id}?${query.length < 1 ?
+            "page=1" :
+            "search=" + query
+        }`)
         .then(res => res.json())
         .then(body => {
             if (body !== null) {
@@ -110,7 +119,7 @@ const Database = ({ id }) => {
             }</ul>
         </ListWrap>
 
-        {data !== null && <Footer /* Previous/Next Page Buttons */>
+        {data !== null && showButtons && <Footer /* Previous/Next Page Buttons */>
             <button // Previous Page
                 disabled={data.previous === null ? true : false}
                 onClick={() => setPage(page - 1)}
