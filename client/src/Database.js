@@ -3,8 +3,9 @@ import styled from "styled-components";
 // React Icons
 import { GoArrowLeft, GoArrowRight } from "react-icons/go";
 
-// Item Sub-Component
-import Item from "./Item";
+// Child Component
+import Search from "./Search"; // Search Tab
+import Item from "./Item"; // List item sub-component
 
 // Database Component for People, Planets, Starships (based on id parameter)
 const Database = ({ id }) => {
@@ -12,6 +13,22 @@ const Database = ({ id }) => {
     const [page, setPage] = useState(1); // Page # State for API
     // Container to store fetched data from backend server
     const [data, setData] = useState(null);
+    
+    // Search Bar Results Function
+    const getResults = (query) => {
+        setLoading("loading");
+        fetch(`/people?search=${query}`)
+        .then(res => res.json())
+        .then(body => {
+            if (body !== null) {
+                if (body.results.length < 1) {
+                    return setLoading("empty")
+                }
+                setLoading("loaded");
+                return setData(body);
+            }
+        });
+    };
 
     // UseEffect Callback to render data state from backend to frontend
     useEffect(() => {
@@ -23,13 +40,17 @@ const Database = ({ id }) => {
                 if (body.results.length < 1) {
                     return setLoading("empty") // Loading state for empty array returned
                 }
-                setLoading("loaded") // Loaded state for results
+                setLoading("loaded"); // Loaded state for results
                 return setData(body); // Sets state for body results
             }
         })
     }, [id, page]);
 
     return <DatabaseWrap>
+        {id === "people" && <Search //Search Results Component
+            getResults={getResults}
+        />}
+
         <ListWrap /* Database Items List Renderer from Fetch */>
             <h2>List of { // Title of Database Page using "id"
                 id.slice(0, 1).toUpperCase() + id.slice(1,)
@@ -152,6 +173,14 @@ const Footer = styled(DatabaseWrap)`
         background: none;
         color: white;
         cursor: pointer;
+        transition: 300ms ease-in-out;
+
+        &:hover {
+            border-color: yellow;
+            color: yellow;
+            transition: 200ms ease-in;
+        };
+
         &:disabled {
             color: gray;
             border-color: gray;
