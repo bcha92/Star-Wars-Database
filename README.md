@@ -3,7 +3,7 @@ ReactJS Application with a NodeJS virtual server using Star Wars API at https://
 
 ## NodeJS Server Endpoints
 
-Example Endpoint for Reference: https://swapi/dev/`people`?`search`=skywalker&`page`=1
+Example Endpoint for Reference: https://swapi/dev/people?search=skywalker&page=1
 
 |ENDPOINTS|QUERY|METHOD|DESCRIPTION|
 |---------|------|----|-----------|
