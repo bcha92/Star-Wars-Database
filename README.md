@@ -1,6 +1,22 @@
 # Star-Wars-Database
 ReactJS Application with a NodeJS virtual server using Star Wars API at https://swapi.dev/ to render an aggregation of results based on people, planets, and starships.
 
+## NodeJS Server Endpoints
+
+Example Endpoint for Reference: https://swapi/dev/`people`?`search`=skywalker&`page`=1
+
+|ENDPOINTS|QUERY|METHOD|DESCRIPTION|
+|---------|------|----|-----------|
+|`/people`|`page`|GET|DEFAULT: Get a list of people (subdivided by 10 entries per page number query*)|
+|`/people`|`search`|GET|Get a list of people filtered by query string matching name of person (not case sensitive)|
+|`/planets`|`page`|GET|DEFAULT: Get a list of planets (subdivided by 10 entries per page number query*)|
+|`/planets`|`search`|GET|Get a list of planets filtered by query string matching name of planet (not case sensitive)|
+|`/starships`|`page`|GET|DEFAULT: Get a list of starships (subdivided by 10 entries per page number query*)|
+|`/starships`|`search`|GET|Get a list of starships filtered by query string matching either name or model of the starship (not case sensitive)|
+
+\* Page # by default endpoint query is `1`. Excluding the query will still result in returned results subdivided by page number.
+
+---
 ## Getting Started
 ### VSCode
 ---
@@ -41,4 +57,4 @@ If you would like to return to the previous page, just click on the Previous Pag
 ---
 
 <img src="screenshots/star.JPG" alt="starships" />
-Alternatively, you can search starships which will only return up to the first ten results based on the query you enter and click on the submit button (alternatively, pressing the "Enter" key on your keyboard also works).
+Alternatively, you can use the search box which will only return up to the first ten results based on the name of the entry (starships entries include both name and/or model identification; example: The Ship "Executor" has a model name called "Executor-class star dreadnought", so if you search "star", any queries involving the name or model name will be included) you enter and click on the submit button (alternatively, pressing the "Enter" key on your keyboard also works).
