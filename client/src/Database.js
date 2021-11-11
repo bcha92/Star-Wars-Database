@@ -163,7 +163,7 @@ const ListWrap = styled(DatabaseWrap)`
     & > ul {
         list-style-type: none;
         margin-top: 20px;
-        width: 100%;
+        width: 80%;
         & > h3 {font-size: 26px};
     };
 `;
