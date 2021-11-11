@@ -14,7 +14,7 @@ Example Endpoint for Reference: https://swapi.dev/api/people?search=skywalker&pa
 |`/starships`|`page`|GET|DEFAULT: Get a list of starships (subdivided by 10 entries per page number query*)|
 |`/starships`|`search`|GET|Get a list of starships filtered by query string matching either name or model of the starship (not case sensitive)|
 
-\* Page # by default endpoint query is `1`. Excluding the query will still result in returned results subdivided by page number.
+\* Page # by default endpoint query is `1`. Excluding the query altogether will still result in returned queries in the same manner as `?page=1`.
 
 ---
 ## Getting Started
