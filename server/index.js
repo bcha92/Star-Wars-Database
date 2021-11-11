@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 
+// AJAX Handlers
 import { getPeople, getPlanets, getStarships } from "./handlers.js";
 
 // Local Port to host application || 4000 by default

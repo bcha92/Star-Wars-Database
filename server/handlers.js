@@ -1,7 +1,7 @@
 import swapi from "swapi-node"; // Star Wars API
 
 // Get People (10 results per page count)
-// or Get Person by string query search
+// or Get People based on string query search
 export const getPeople = async (req, res) => {
     const { page=1, search="" } = req.query; // Uses req.query for front-end page # query and name search query by string
     return res.status(200).json(
@@ -13,6 +13,7 @@ export const getPeople = async (req, res) => {
 };
 
 // Get Planets (10 results per page count)
+// or Get Planets based on string query search
 export const getPlanets = async (req, res) => {
     const { page=1, search="" } = req.query; // Uses req.query for front-end page # query and name search query by string
     return res.status(200).json(
@@ -24,6 +25,7 @@ export const getPlanets = async (req, res) => {
 };
 
 // Get Starships (10 results per page count)
+// or Get Starships based on string query search
 export const getStarships = async (req, res) => {
     const { page=1, search="" } = req.query; // Uses req.query for front-end page # query and name/model search query by string
     return res.status(200).json(
