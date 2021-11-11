@@ -73,6 +73,7 @@ const ItemWrap = styled.li`
     border-radius: 10px;
     padding: 10px;
     margin: 10px 0;
+    transition: 300ms ease-out;
 
     & > span {
         margin: 10px 5px 5px;
@@ -86,6 +87,12 @@ const ItemWrap = styled.li`
             margin-top: 5px;
             cursor: pointer;
         };
+    };
+
+    // Optional Hover Effect // Enlarge
+    &:hover {
+        transform: scale(105%);
+        transition: 200ms ease-in;
     };
 `;
 

@@ -55,6 +55,7 @@ const SearchForm = styled.form`
             &:hover {
                 border-color: yellow;
                 color: yellow;
+                transform: scale(105%);
                 transition: 200ms ease-in;
             };
         };

@@ -79,6 +79,7 @@ const Header = styled(Wrapper)` // Header Menu
 
       &:hover {
         color: yellow;
+        transform: scale(120%);
         transition: 200ms ease-in;
       };
 

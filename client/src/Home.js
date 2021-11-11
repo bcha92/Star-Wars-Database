@@ -27,6 +27,7 @@ const HomeWrap = styled.div`
         cursor: default;
         &:hover {
             color: yellow;
+            transform: scale(120%);
             transition: 200ms ease-in;
         };
     };

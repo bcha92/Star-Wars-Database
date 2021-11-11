@@ -156,6 +156,7 @@ const ListWrap = styled(DatabaseWrap)`
         cursor: default;
         &:hover {
             color: yellow;
+            transform: scale(120%);
             transition: 200ms ease-in;
         };
     };
@@ -186,6 +187,7 @@ const Footer = styled(DatabaseWrap)`
         &:hover {
             border-color: yellow;
             color: yellow;
+            transform: scale(110%);
             transition: 200ms ease-in;
         };
 
@@ -193,6 +195,7 @@ const Footer = styled(DatabaseWrap)`
             color: gray;
             border-color: gray;
             cursor: default;
+            transform: none;
         };
     };
 `;
