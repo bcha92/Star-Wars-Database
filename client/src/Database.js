@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+// React Icons
+import { GoArrowLeft, GoArrowRight } from "react-icons/go";
+
+// Item Sub-Component
+import Item from "./Item";
 
 // Database Component for People, Planets, Starships (based on id parameter)
 const Database = ({ id }) => {
     const [isLoading, setLoading] = useState("idle"); // Loading State
+    const [page, setPage] = useState(1); // Page # State for API
     // Container to store fetched data from backend server
     const [data, setData] = useState(null);
 
     // UseEffect Callback to render data state from backend to frontend
     useEffect(() => {
         setLoading("loading") // sets loading state
-        fetch(`/${id}?page=${2}`) // fetches API endpoint
+        fetch(`/${id}?page=${page}`) // fetches API endpoint
         .then(res => res.json()) // process to json()
         .then(body => { // body result
             if (body !== null) { // Process if body is not null
@@ -18,17 +24,88 @@ const Database = ({ id }) => {
                     return setLoading("empty") // Loading state for empty array returned
                 }
                 setLoading("loaded") // Loaded state for results
-                return setData(body.results); // Sets state for body results
+                return setData(body); // Sets state for body results
             }
         })
-    }, [id]);
+    }, [id, page]);
 
     console.log(isLoading, data);
 
     return <DatabaseWrap>
-        <ListWrap>
-            <h2>List of {id.slice(0, 1).toUpperCase() + id.slice(1,)} in the Star Wars Universe</h2>
+        <ListWrap /* Database Items List Renderer from Fetch */>
+            <h2>List of { // Title of Database Page using "id"
+                id.slice(0, 1).toUpperCase() + id.slice(1,)
+            } in the Star Wars Universe</h2>
+
+            <ul>{isLoading === "loaded" ? // Show results if items are loaded
+            data !== null && data.results.map((item, index) =>
+                id === "people" ? // Item Component for People
+                    <Item
+                        key={index}
+                        id={id}
+                        name={item.name}
+                        gender={item.gender}
+                        birth={item.birth_year}
+                        mass={item.mass}
+                        hair={item.hair_color}
+                        eye={item.eye_color}
+                        skin={item.skin_color}
+                    /> :
+
+                id === "planets" ? // Item Component for Planets
+                    <Item
+                        key={index}
+                        id={id}
+                        name={item.name}
+                        population={item.population}
+                        diameter={item.diameter}
+                        terrain={item.terrain}
+                        climate={item.climate}
+                        gravity={item.gravity}
+                        orbit={item.orbital_period}
+                        rotation={item.rotation_period}
+                        water={item.surface_water}
+                    /> :
+
+                    <Item // Item Component for Starships
+                        key={index}
+                        id={id}
+                        name={item.name}
+                        model={item.model}
+                        classification={item.starship_class}
+                        manufacturer={item.manufacturer}
+                        cost={item.cost_in_credits}
+                        length={item.length}
+                        cargo={item.cargo_capacity}
+                        speed={item.max_atmosphering_speed}
+                        hyperdrive={item.hyperdrive_rating}
+                        consumables={item.consumables}
+                        crew={item.crew}
+                        passengers={item.passengers}
+                        MGLT={item.MGLT}
+                    />
+            ) :
+
+            isLoading === "loading" ? // Loading State
+            <h3>Loading Database...</h3> :
+            <h3>There are no matches based on your query</h3>
+            }</ul>
         </ListWrap>
+
+        {data !== null && <Footer /* Previous/Next Page Buttons */>
+            <button // Previous Page
+                disabled={data.previous === null ? true : false}
+                onClick={() => setPage(page - 1)}
+            >
+                <GoArrowLeft /> Previous Page
+            </button>
+            <button // Next Page
+                disabled={data.next === null ? true : false}
+                onClick={() => setPage(page + 1)}
+            >
+                Next Page <GoArrowRight />
+            </button>
+        </Footer>}
     </DatabaseWrap>
 };
 
@@ -36,12 +113,15 @@ const Database = ({ id }) => {
 const DatabaseWrap = styled.div`
     display: flex;
     flex-flow: column wrap;
+    flex: 1;
+    background: #333;
 `;
 
 const ListWrap = styled(DatabaseWrap)`
-    background: #333;
     color: white;
     align-items: center;
+    padding: 20px 0;
+
     & > h2 {
         font-size: 30px;
         margin: 10px 0;
@@ -50,6 +130,33 @@ const ListWrap = styled(DatabaseWrap)`
         &:hover {
             color: yellow;
             transition: 200ms ease-in;
+        };
+    };
+
+    & > ul {
+        list-style-type: none;
+        margin-top: 20px;
+        & > h3 {font-size: 26px};
+    };
+`;
+
+const Footer = styled(DatabaseWrap)`
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+    padding: 10px 0;
+    & > button {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid white;
+        background: none;
+        color: white;
+        cursor: pointer;
+        &:disabled {
+            color: gray;
+            border-color: gray;
+            cursor: default;
         };
     };
 `;
