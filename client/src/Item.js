@@ -57,10 +57,10 @@ const Item = ({ id, name,
         </span>}
         {details ? // Dropdown State Change on Click
         <p className="drop" onClick={() => setDetails(!details)}>
-            <GoTriangleUp /> Click to hide details
+            <GoTriangleUp /> Click here to hide details
         </p> :
         <p className="drop" onClick={() => setDetails(!details)}>
-            <GoTriangleRight /> Click to show details
+            <GoTriangleRight /> Click here to show details
         </p>}
     </ItemWrap>
 };
@@ -70,7 +70,6 @@ const ItemWrap = styled.li`
     display: flex;
     flex-flow: column wrap;
     border: 2px solid white;
-    width: 300px;
     border-radius: 10px;
     padding: 10px;
     margin: 10px 0;

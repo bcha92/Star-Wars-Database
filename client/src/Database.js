@@ -29,8 +29,6 @@ const Database = ({ id }) => {
         })
     }, [id, page]);
 
-    console.log(isLoading, data);
-
     return <DatabaseWrap>
         <ListWrap /* Database Items List Renderer from Fetch */>
             <h2>List of { // Title of Database Page using "id"
@@ -120,7 +118,7 @@ const DatabaseWrap = styled.div`
 const ListWrap = styled(DatabaseWrap)`
     color: white;
     align-items: center;
-    padding: 20px 0;
+    padding: 20px 50px;
 
     & > h2 {
         font-size: 30px;
@@ -136,6 +134,7 @@ const ListWrap = styled(DatabaseWrap)`
     & > ul {
         list-style-type: none;
         margin-top: 20px;
+        width: 100%;
         & > h3 {font-size: 26px};
     };
 `;
