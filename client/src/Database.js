@@ -16,10 +16,13 @@ const Database = ({ id }) => {
 
     // Disable/Enable Previous/Next Page buttons while using search tab.
     const [showButtons, setButtons] = useState(true);
+    // Query Use Flag ?
+    const [queryUsed, setQuery] = useState(false);
     
     // Search Bar Results Function
     const getResults = (query) => {
         setLoading("loading");
+        setQuery(query);
         query.length < 1 ?
         setButtons(true) : setButtons(false);
 
@@ -42,6 +45,7 @@ const Database = ({ id }) => {
     // UseEffect Callback to render data state from backend to frontend
     useEffect(() => {
         setLoading("loading") // sets loading state
+        setQuery(false); // query flag set to false
         fetch(`/${id}?page=${page}`) // fetches API endpoint
         .then(res => res.json()) // process to json()
         .then(body => { // body result
@@ -60,61 +64,54 @@ const Database = ({ id }) => {
         <Search getResults={getResults} id={id} />
 
         <ListWrap /* Database Items List Renderer from Fetch */>
-            <h2>List of { // Title of Database Page using "id"
-                id.slice(0, 1).toUpperCase() + id.slice(1,)
-            } in the Star Wars Universe</h2>
+            <h2>{queryUsed ? // Default Title for List of.. or Search Results
+                `Top search results in ${
+                    id.slice(0, 1).toUpperCase() + id.slice(1,)
+                } for "${queryUsed}"` :
+                `List of ${ // Title of Database Page using "id"
+                    id.slice(0, 1).toUpperCase() + id.slice(1,)
+                } in the Star Wars Universe`}</h2>
 
-            <ul>{isLoading === "loaded" ? // Show results if items are loaded
-            data !== null && data.results.map((item, index) =>
-                id === "people" ? // Item Component for People
-                    <Item
-                        key={index}
-                        id={id}
-                        name={item.name}
-                        gender={item.gender}
-                        birth={item.birth_year}
-                        mass={item.mass}
-                        hair={item.hair_color}
-                        eye={item.eye_color}
-                        skin={item.skin_color}
-                    /> :
-
-                id === "planets" ? // Item Component for Planets
-                    <Item
-                        key={index}
-                        id={id}
-                        name={item.name}
-                        population={item.population}
-                        diameter={item.diameter}
-                        terrain={item.terrain}
-                        climate={item.climate}
-                        gravity={item.gravity}
-                        orbit={item.orbital_period}
-                        rotation={item.rotation_period}
-                        water={item.surface_water}
-                    /> :
-
-                    <Item // Item Component for Starships
-                        key={index}
-                        id={id}
-                        name={item.name}
-                        model={item.model}
-                        classification={item.starship_class}
-                        manufacturer={item.manufacturer}
-                        cost={item.cost_in_credits}
-                        length={item.length}
-                        cargo={item.cargo_capacity}
-                        speed={item.max_atmosphering_speed}
-                        hyperdrive={item.hyperdrive_rating}
-                        consumables={item.consumables}
-                        crew={item.crew}
-                        passengers={item.passengers}
-                        MGLT={item.MGLT}
-                    />
-            ) :
+            <ul>{isLoading === "loaded" && data !== null ? // Show results if items are loaded
+                data.results.map((item, index) => <Item
+                    // Item Component Attributes
+                    key={index} // General Attributes (key to name)
+                    id={id}
+                    name={item.name}
+                    // Person Attributes
+                    gender={item.gender}
+                    birth={item.birth_year}
+                    mass={item.mass}
+                    hair={item.hair_color}
+                    eye={item.eye_color}
+                    skin={item.skin_color}
+                    // Planet Attributes
+                    population={item.population}
+                    diameter={item.diameter}
+                    terrain={item.terrain}
+                    climate={item.climate}
+                    gravity={item.gravity}
+                    orbit={item.orbital_period}
+                    rotation={item.rotation_period}
+                    water={item.surface_water}
+                    // Starship Attributes
+                    model={item.model}
+                    classification={item.starship_class}
+                    manufacturer={item.manufacturer}
+                    cost={item.cost_in_credits}
+                    length={item.length}
+                    cargo={item.cargo_capacity}
+                    speed={item.max_atmosphering_speed}
+                    hyperdrive={item.hyperdrive_rating}
+                    consumables={item.consumables}
+                    crew={item.crew}
+                    passengers={item.passengers}
+                    MGLT={item.MGLT}
+                />) :
 
             isLoading === "loading" ? // Loading State
             <h3>Loading Database...</h3> :
+            // No Result from Query
             <h3>There are no matches based on your query</h3>
             }</ul>
         </ListWrap>
