@@ -58,3 +58,12 @@ If you would like to return to the previous page, just click on the Previous Pag
 
 <img src="screenshots/star.JPG" alt="starships" />
 Alternatively, you can use the search box which will only return up to the first ten results based on the name of the entry (starships entries include both name and/or model identification; example: The Ship "Executor" has a model name called "Executor-class star dreadnought", so if you search "star", any queries involving the name or model name will be included) you enter and click on the submit button (alternatively, pressing the "Enter" key on your keyboard also works).
+
+---
+## Questions, Comments, Changes, or Suggestions ?
+
+Feel free to fork and borrow this repository for your own use, and any changes you want to suggest, feel free to make a pull request with your suggested changes and your comments to indicate what needs to be changed and/or improve.
+
+**Please note I will `IGNORE and DISREGARD` any requested changes that does not include a comment, feedback, note, or any indication of what, where, or why you are requesting the change!**
+
+I can also be reached at my email address: bcha92@hotmail.com or my LinkedIn: https://www.linkedin.com/in/brandoncha/
